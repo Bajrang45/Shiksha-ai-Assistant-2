@@ -1,4 +1,4 @@
-const API_URL = localStorage.getItem('shiksha_api_url') || 'http://127.0.0.1:8000/api';
+const API_URL = localStorage.getItem('shiksha_api_url') || 'https://shiksha-ai-assistant.onrender.com';
 const dialog = document.querySelector('#auth-dialog');
 const template = document.querySelector('#auth-template');
 
