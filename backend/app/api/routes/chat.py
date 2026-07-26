@@ -30,7 +30,7 @@ def ask_chat(payload: ChatRequest, current_user: dict = Depends(get_current_user
         return ChatResponse(answer=answer)
 
     try:
-        from openai import OpenAI, OpenAIError
+        from openai import OpenAI
 
         client = OpenAI(api_key=settings.openai_api_key, timeout=30.0, max_retries=0)
         response = client.responses.create(
@@ -42,6 +42,8 @@ def ask_chat(payload: ChatRequest, current_user: dict = Depends(get_current_user
     except ImportError as exc:
         raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="AI chat dependencies are not installed. Run pip install -r requirements.txt.") from exc
     except Exception as exc:
+        if exc.__class__.__name__ == "RateLimitError":
+            raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="OpenAI API quota is exhausted. Add credits or enable billing for the project that owns OPENAI_API_KEY, then try again.") from exc
         raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail="The AI service could not answer right now. Please try again.") from exc
 
     if not answer:

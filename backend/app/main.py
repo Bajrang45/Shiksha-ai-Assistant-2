@@ -3,7 +3,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import auth, chat, health, materials, quiz
+from app.api.routes import auth, chat, flashcards, health, materials, quiz
 from app.core.config import get_settings
 
 settings = get_settings()
@@ -24,3 +24,4 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(chat.router, prefix="/api")
 app.include_router(materials.router, prefix="/api")
 app.include_router(quiz.router, prefix="/api")
+app.include_router(flashcards.router, prefix="/api")
