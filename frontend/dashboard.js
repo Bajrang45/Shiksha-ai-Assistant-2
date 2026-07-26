@@ -5,7 +5,7 @@ else { document.querySelector('#student-name').textContent = user.name.split(' '
 const workspace = document.querySelector('#ai-workspace');
 const fileInput = document.querySelector('#file-input');
 const token = () => localStorage.getItem('shiksha_token');
-const apiUrl = () => localStorage.getItem('shiksha_api_url') || 'http://127.0.0.1:8000/api';
+const apiUrl = () => localStorage.getItem('shiksha_api_url') || 'https://shiksha-ai-assistant.onrender.com/api';
 const localHistoryKey = 'shiksha_chat_history';
 function logout() { localStorage.removeItem('shiksha_token'); localStorage.removeItem('shiksha_user'); window.location.replace('index.html'); }
 document.querySelector('#logout').onclick = logout;
