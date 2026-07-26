@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     mongodb_database: str = "shiksha_assistant"
     openai_api_key: str | None = None
     openai_chat_model: str = "gpt-4.1-mini"
+    openai_embedding_model: str = "text-embedding-3-small"
     cors_origins: str = "http://localhost:5500,http://127.0.0.1:5500"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")

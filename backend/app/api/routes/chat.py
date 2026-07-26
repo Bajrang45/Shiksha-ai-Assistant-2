@@ -16,18 +16,14 @@ the student asks for depth."""
 
 
 @router.post("", response_model=ChatResponse)
-def ask_chat(payload: ChatRequest, current_user: dict = Depends(get_current_user)) -> ChatResponse:
+async def ask_chat(payload: ChatRequest, current_user: dict = Depends(get_current_user)) -> ChatResponse:
     settings = get_settings()
-    material_text = material_store.combined_text(current_user["id"])
-    source = material_store.best_source(current_user["id"], payload.question)
+    material_text = await material_store.combined_text(current_user["id"])
+    source = await material_store.best_source(current_user["id"], payload.question)
     if not settings.openai_api_key:
-        if material_text:
-            answer = extractive_answer(payload.question, material_text)
-            chat_store.add(current_user["id"], payload.question, answer)
-            return ChatResponse(answer=answer, source=source)
-        answer = local_study_response(payload.question)
-        chat_store.add(current_user["id"], payload.question, answer)
-        return ChatResponse(answer=answer)
+        answer = fallback_answer(payload.question, material_text)
+        await chat_store.add(current_user["id"], payload.question, answer)
+        return ChatResponse(answer=answer, source=source)
 
     try:
         from openai import OpenAI
@@ -39,22 +35,21 @@ def ask_chat(payload: ChatRequest, current_user: dict = Depends(get_current_user
             input=f"Study material:\n{material_text or 'No uploaded material is available.'}\n\nStudent question: {payload.question}",
         )
         answer = response.output_text.strip()
-    except ImportError as exc:
-        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="AI chat dependencies are not installed. Run pip install -r requirements.txt.") from exc
-    except Exception as exc:
-        if exc.__class__.__name__ == "RateLimitError":
-            raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="OpenAI API quota is exhausted. Add credits or enable billing for the project that owns OPENAI_API_KEY, then try again.") from exc
-        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail="The AI service could not answer right now. Please try again.") from exc
+    except Exception:
+        # The demo remains useful if the hosted AI is unavailable because of a
+        # missing package, API key issue, network interruption, or quota limit.
+        # Return a grounded local answer instead of surfacing a technical error.
+        answer = fallback_answer(payload.question, material_text)
 
     if not answer:
-        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail="The AI service returned an empty answer. Please try again.")
-    chat_store.add(current_user["id"], payload.question, answer)
+        answer = fallback_answer(payload.question, material_text)
+    await chat_store.add(current_user["id"], payload.question, answer)
     return ChatResponse(answer=answer, source=source)
 
 
 @router.get("/history", response_model=list[ChatHistoryItem])
-def chat_history(current_user: dict = Depends(get_current_user)) -> list[dict]:
-    return chat_store.list_for_user(current_user["id"])
+async def chat_history(current_user: dict = Depends(get_current_user)) -> list[dict]:
+    return await chat_store.list_for_user(current_user["id"])
 
 
 def extractive_answer(question: str, material: str) -> str:
@@ -68,6 +63,11 @@ def extractive_answer(question: str, material: str) -> str:
     if not selected:
         return "I could not find a relevant passage in your uploaded material. Try asking with terms used in the document."
     return "Based on your uploaded material:\n\n" + " ".join(selected)
+
+
+def fallback_answer(question: str, material_text: str) -> str:
+    """Provide a useful response when the hosted AI service is unavailable."""
+    return extractive_answer(question, material_text) if material_text else local_study_response(question)
 
 
 def local_study_response(question: str) -> str:

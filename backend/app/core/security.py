@@ -5,7 +5,10 @@ from passlib.context import CryptContext
 
 from app.core.config import get_settings
 
-password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# PBKDF2-SHA256 uses Python's standard cryptographic primitives and avoids the
+# bcrypt 5.x / passlib compatibility issue that rejects every password during
+# registration with a misleading 72-byte error.
+password_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 ALGORITHM = "HS256"
 
 
@@ -21,4 +24,3 @@ def create_access_token(subject: str) -> str:
     settings = get_settings()
     expires_at = datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_expire_minutes)
     return jwt.encode({"sub": subject, "exp": expires_at}, settings.secret_key, algorithm=ALGORITHM)
-

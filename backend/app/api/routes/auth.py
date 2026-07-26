@@ -13,17 +13,17 @@ def public_user(user: dict) -> UserResponse:
 
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
-def register(payload: RegisterRequest) -> TokenResponse:
+async def register(payload: RegisterRequest) -> TokenResponse:
     try:
-        user = user_store.create(payload.name, str(payload.email), payload.password)
+        user = await user_store.create(payload.name, str(payload.email), payload.password)
     except ValueError as exc:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
     return TokenResponse(access_token=create_access_token(user["id"]), user=public_user(user))
 
 
 @router.post("/login", response_model=TokenResponse)
-def login(payload: LoginRequest) -> TokenResponse:
-    user = user_store.authenticate(str(payload.email), payload.password)
+async def login(payload: LoginRequest) -> TokenResponse:
+    user = await user_store.authenticate(str(payload.email), payload.password)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect email or password.")
     return TokenResponse(access_token=create_access_token(user["id"]), user=public_user(user))

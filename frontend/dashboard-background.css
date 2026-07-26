@@ -1,0 +1,230 @@
+/* Post-signup learning dashboard background. */
+.app-shell {
+  background:
+    radial-gradient(circle at 82% 6%, #12a8ad30, transparent 27%),
+    radial-gradient(circle at 8% 85%, #057eaa2b, transparent 31%),
+    linear-gradient(135deg, #022c40 0%, #032838 46%, #061c32 100%);
+}
+
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+main::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 0 245px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .38;
+  background-image:
+    linear-gradient(90deg, #42e7ed45 0 10px, transparent 10px 27px, #42e7ed25 27px 29px, transparent 29px),
+    linear-gradient(0deg, transparent 48%, #43dce22e 49%, transparent 50%),
+    radial-gradient(circle, #8cffff 0 1.3px, transparent 2px);
+  background-size: 145px 3px, 210px 125px, 66px 57px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 90%, transparent);
+}
+
+main > * { position: relative; z-index: 1; }
+
+aside { background: #031c31e8; border-right: 1px solid #39cbd531; }
+aside nav a.active, aside nav a:hover { background: #0d526a; }
+.ai-side-card { background: linear-gradient(140deg, #0a536c, #063249); border-color: #31c6d060; }
+
+header h1 { color: #f1ffff; }
+header h1 span { color: #5cf4f4; }
+.intro { color: #b7d6dd; }
+.intro b { color: #edffff; }
+.avatar { background: #bdf8f7; color: #056277; }
+
+.goal-banner { background: linear-gradient(100deg, #05738d, #087d96 60%, #0b5b8a); box-shadow: 0 13px 28px #001d2e96; }
+.panel, .workspace, .stats article, .actions-grid button { box-shadow: 0 8px 22px #00172435; }
+.section-heading h2 { color: #f3ffff; }
+.section-label { color: #5be5ed; }
+
+/* Raised, illuminated study-tool buttons. */
+.quick-actions .section-heading::after { color: #a6cdd1; }
+.actions-grid button {
+  min-height: 132px;
+  overflow: hidden;
+  color: #edffff;
+  background: linear-gradient(145deg, #104f5a 0%, #07313e 48%, #041f31 100%);
+  border: 1px solid #82e7dfb8;
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 #d2fff66b, inset 0 -12px 20px #00151e72, 0 0 0 1px #c5a86757, 0 8px 19px #00141e9c;
+}
+
+.actions-grid button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 12px;
+  background: linear-gradient(130deg, #86ffff20, transparent 34%, transparent 70%, #d7bd6b16);
+  pointer-events: none;
+}
+
+.actions-grid button:hover {
+  border-color: #b9fff8;
+  box-shadow: inset 0 1px 0 #efffffb0, inset 0 -12px 20px #00151e72, 0 0 13px #53f1e15e, 0 11px 22px #00141ed1;
+  transform: translateY(-3px);
+}
+
+.actions-grid button:focus-visible { outline-color: #7efff4; }
+.actions-grid button span { position: relative; z-index: 1; background: #63f2eb18; color: #bafffa; border: 1px solid #8cfdf565; box-shadow: inset 0 1px #e2ffff3b; }
+.actions-grid button b, .actions-grid button small { position: relative; z-index: 1; }
+.actions-grid button small { color: #a8d5d9; }
+.actions-grid button::after { color: #8cfff5; text-shadow: 0 0 9px #30fff1b0; }
+
+/* Full-screen AI Study Desk layout. */
+.app-shell { display: block; min-height: 100vh; }
+.app-shell aside { display: none; }
+main { max-width: 1540px; padding: 30px min(4vw, 58px) 38px; }
+main::before { inset: 0; opacity: .27; }
+
+header {
+  position: relative;
+  min-height: 255px;
+  padding: 34px 38px;
+  align-items: flex-start;
+  overflow: hidden;
+  border: 1px solid #2f77e18a;
+  border-radius: 23px;
+  background:
+    radial-gradient(circle at 79% 26%, #6d2aff9c 0 4%, transparent 20%),
+    radial-gradient(circle at 89% 22%, #00e5ff70 0 2%, transparent 15%),
+    radial-gradient(ellipse at 84% 80%, #1c61ff75, transparent 36%),
+    linear-gradient(112deg, #05072c 0%, #081c58 53%, #102c83 100%);
+  box-shadow: inset 0 1px #78eaff65, 0 16px 34px #000b3c8c;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 460px;
+  height: 205px;
+  right: 112px;
+  bottom: -10px;
+  border-radius: 55% 45% 10% 12%;
+  transform: skewX(-11deg);
+  background:
+    radial-gradient(ellipse at 53% 22%, #e9a1fa 0 7%, transparent 7.7%),
+    linear-gradient(108deg, transparent 0 31%, #3d1b75 32% 43%, #0f1851 44% 58%, #3c2c9d 59% 74%, transparent 75%),
+    linear-gradient(150deg, transparent 0 42%, #8c4cff 43% 58%, #131b62 59% 100%);
+  filter: drop-shadow(0 0 17px #407eff9c);
+  opacity: .9;
+}
+
+header::after {
+  content: "✦  ◌  ⚛  ✧  ⌁  ✦";
+  position: absolute;
+  z-index: 0;
+  top: 24px;
+  right: 78px;
+  color: #82efff;
+  white-space: pre;
+  word-spacing: 30px;
+  font: 32px Outfit, sans-serif;
+  letter-spacing: 9px;
+  text-shadow: 0 0 14px #51d9ff;
+}
+
+header > div:first-child { position: relative; z-index: 1; }
+header h1 { max-width: 620px; font-size: clamp(34px, 4vw, 55px); line-height: 1.03; margin-top: 15px; }
+header h1::before { content: "🎓  AI STUDY DESK"; display: block; margin-bottom: 22px; color: #75d8ff; font: 700 14px 'DM Sans'; letter-spacing: 1.2px; }
+header .intro { font-size: 16px; color: #c9d9ff; }
+.account-actions { position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; }
+header .avatar { width: 50px; height: 50px; background: #082456a8; color: #e5ffff; border: 1px solid #42eaff; box-shadow: 0 0 20px #25d9ff75; }
+#logout-top { border: 1px solid #78dced94; border-radius: 10px; padding: 9px 12px; background: #062257a6; color: #dfffff; font: 600 12px 'DM Sans'; cursor: pointer; }
+#logout-top:hover { background: #0c4077; border-color: #a4ffff; }
+
+.goal-banner {
+  position: relative;
+  z-index: 2;
+  max-width: 920px;
+  margin: -74px 0 22px 28px;
+  padding: 20px 24px;
+  border: 1px solid #4384fbc7;
+  border-radius: 16px;
+  background: linear-gradient(105deg, #0c1a60ef, #10297ee8 65%, #163f98d9);
+  box-shadow: inset 0 1px #70ecff51, 0 13px 28px #000629a8;
+}
+.goal-banner .btn-coral { background: linear-gradient(105deg, #9b25f1, #196eff); box-shadow: 0 7px 20px #6725f080; }
+
+.stats { gap: 16px; margin: 20px 0 22px; }
+.stats article {
+  position: relative;
+  overflow: hidden;
+  color: #efffff;
+  border-color: #3a75d7a3;
+  background: linear-gradient(145deg, #11164cdb, #07133ddd);
+  box-shadow: inset 0 1px #75d7ff2c, 0 9px 18px #0008298c;
+}
+.stats article::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, #62d8ff14, transparent 42%); pointer-events: none; }
+.stats article:nth-child(1) { border-color: #fa5d6c9e; }
+.stats article:nth-child(2) { border-color: #248affbd; }
+.stats article:nth-child(3) { border-color: #a043ffbf; }
+.stats article:nth-child(4) { border-color: #20e7b9a8; }
+.stats article:nth-child(5) { border-color: #f5bf42a8; }
+.stats article:nth-child(6) { border-color: #367effc0; }
+.stats small, .stats em { color: #bcd3ec; }
+.stats b { color: #fff; font-size: 30px; }
+
+.panel, .workspace {
+  color: #e9f5ff;
+  border-color: #3477d59e;
+  background: linear-gradient(145deg, #0c1d54e8, #08143de8);
+  box-shadow: inset 0 1px #73d9ff32, 0 12px 25px #00082991;
+}
+.panel h2, .workspace h2, .activity-panel li b { color: #f2ffff; }
+.card-kicker, .activity-panel li small, .drop-zone p, .drop-zone small { color: #99c3e8; }
+.ai-pill { background: #164887; color: #7beeff; }
+.drop-zone { border-color: #3d93e1aa; background: #0718428a; }
+.drop-zone small b { background: #173465; color: #d9f5ff; }
+.upload-icon { background: #293dc7; color: #dfffff; }
+.quiet-btn { color: #60eaff; }
+
+/* Quiz results use light cards, so they need a dark reading colour. */
+.quiz-result .quiz-question { color: #172852; background: #f6f9ff; border-color: #c5d7f2; }
+.quiz-result .quiz-question summary { color: #172852; font-weight: 600; }
+.quiz-result .quiz-question p { color: #1468d9; font-weight: 600; }
+
+/* Chat answers use a light card within the dark dashboard theme. */
+.chat-answer { background: #f7fbff; border-color: #c9dff7; }
+.chat-answer h3 { color: #1267d6; }
+.chat-answer p { color: #172852; }
+.source-card { border-color: #c9dff7; }
+.source-card small { color: #536783; }
+.source-card b { color: #172852; }
+.confidence { color: #168755; }
+
+.quick-actions { display: flex; gap: 20px; align-items: center; margin-top: 20px; }
+.quick-actions .section-heading { margin: 0; min-width: 170px; }
+.quick-actions .section-heading h2, .quick-actions .section-heading::after { display: none; }
+.actions-grid { flex: 1; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.actions-grid button { min-height: 58px; padding: 10px 26px 10px 12px; border-radius: 14px; justify-content: center; }
+.actions-grid button span { position: absolute; left: 12px; top: 11px; width: 34px; height: 34px; }
+.actions-grid button b { padding-left: 40px; white-space: nowrap; font-size: 12px; }
+.actions-grid button small { display: none; }
+
+@media (max-width: 1100px) {
+  header::before, header::after { opacity: .4; }
+  .goal-banner { margin-left: 0; max-width: none; }
+  .quick-actions { display: block; }
+  .quick-actions .section-heading { margin-bottom: 12px; }
+}
+
+@media (max-width: 700px) {
+  main { padding: 18px; }
+  header { min-height: 220px; padding: 26px 20px; }
+  header::before, header::after { display: none; }
+  header h1::before { font-size: 11px; }
+  .goal-banner { margin-top: -30px; }
+  .actions-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 850px) {
+  main::before { inset: 0; }
+}

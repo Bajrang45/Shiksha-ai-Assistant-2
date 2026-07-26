@@ -1,0 +1,48 @@
+/* Deep-blue AI learning atmosphere inspired by the supplied reference. */
+.hero {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 19% -12%, #0880ab 0%, transparent 47%),
+    radial-gradient(circle at 76% 50%, #078edb45 0%, transparent 23%),
+    linear-gradient(112deg, #043866 0%, #061f50 48%, #030a2b 100%);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .52;
+  pointer-events: none;
+  background-image:
+    linear-gradient(118deg, transparent 0 47%, #30d8ff21 47.2% 47.45%, transparent 47.7% 100%),
+    linear-gradient(22deg, transparent 0 55%, #42dffa1c 55.2% 55.4%, transparent 55.7% 100%),
+    radial-gradient(circle at 66% 26%, #78ebff 0 1px, transparent 1.8px),
+    radial-gradient(circle at 84% 65%, #78ebff 0 1px, transparent 1.8px);
+  background-size: 460px 270px, 400px 260px, 78px 76px, 93px 89px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 40%, #000 100%);
+}
+
+.hero::after {
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 18% 110%, #0aa9d229, transparent 37%),
+    linear-gradient(90deg, #051c47aa 0%, transparent 65%);
+}
+
+.lab-art { filter: saturate(.78) hue-rotate(154deg) drop-shadow(0 0 18px #25d8ff3d); }
+.glow-a { background: #006abf6b; }
+.glow-b { background: #08b7ef54; }
+.books span { box-shadow: inset -8px -7px #00142c66, 0 7px 14px #00112c8c; }
+.books span:nth-child(1), .flask i { background: #0099d8; }
+.books span:nth-child(2) { background: #1ad5ee; }
+.books span:nth-child(3) { background: #0871ca; }
+.books span:nth-child(4) { background: #73efff; }
+.atom i { border-color: #58e8ff; box-shadow: 0 0 10px #00cfff55; }
+.atom b, .spark, .f-three { color: #63efff; background: none; }
+.formula { color: #66dff8; }
+
+@media (max-width: 760px) {
+  .hero::before { opacity: .3; -webkit-mask-image: none; mask-image: none; }
+}

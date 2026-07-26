@@ -67,5 +67,5 @@ async def upload_material(file: UploadFile = File(...), current_user: dict = Dep
     text = extract_text(filename, content).strip()
     if not text:
         raise HTTPException(status_code=422, detail="No readable text was found in this file. Try a text-based PDF or DOCX.")
-    material_store.add(current_user["id"], filename, text)
+    await material_store.add(current_user["id"], filename, text)
     return MaterialResponse(filename=filename, summary=short_summary(text), characters_extracted=len(text))

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="tech-background.css" />
   </head>
   <body>
     <main>
@@ -38,16 +39,57 @@
         </div>
       </section>
 
+      <section id="how-it-works" class="how-it-works container">
+        <p class="section-label">SIMPLE WORKFLOW</p>
+        <h2>How Shiksha AI Works</h2>
+        <div class="steps-grid">
+          <article><div class="step-num">1</div><h3>Upload</h3><p>Upload your PDF, DOCX, PPTX, or Images.</p></article>
+          <article><div class="step-num">2</div><h3>Process</h3><p>AI extracts text and images using OCR.</p></article>
+          <article><div class="step-num">3</div><h3>Ask</h3><p>Ask questions or generate quizzes.</p></article>
+          <article><div class="step-num">4</div><h3>Learn</h3><p>Master your subjects faster.</p></article>
+        </div>
+      </section>
+
       <section id="features" class="features container">
         <p class="section-label">LEARN IN YOUR OWN WAY</p>
         <h2>A complete toolkit for<br />curious learners.</h2>
         <div class="feature-grid">
-          <article><div class="feature-icon orange">⌁</div><h3>Ask your materials</h3><p>Get clear, grounded answers from the notes and documents you upload.</p></article>
-          <article><div class="feature-icon blue">✦</div><h3>Practice actively</h3><p>Create quizzes and flashcards that help knowledge truly stick.</p></article>
-          <article><div class="feature-icon pink">◌</div><h3>Keep your momentum</h3><p>Build simple study plans that work around your real life.</p></article>
+          <article><div class="feature-icon orange">⌁</div><h3>AI Chat & PDF Q&A</h3><p>Get clear, grounded answers from the notes and documents you upload.</p></article>
+          <article><div class="feature-icon blue">✦</div><h3>Quiz Generator</h3><p>Create quizzes based directly on your study materials to test knowledge.</p></article>
+          <article><div class="feature-icon pink">▣</div><h3>Flashcards</h3><p>Generate intelligent flashcards for active recall and spaced repetition.</p></article>
+          <article><div class="feature-icon blue">🎤</div><h3>Voice Assistant</h3><p>Talk to Shiksha AI. It supports Speech-to-Text and Text-to-Speech.</p></article>
+          <article><div class="feature-icon pink">🖼️</div><h3>Image Analysis</h3><p>Upload diagrams or photos of your handwritten notes for instant OCR processing.</p></article>
+          <article><div class="feature-icon orange">🌍</div><h3>Multilingual</h3><p>Learn in English, Hindi, and Marathi with seamless AI translation.</p></article>
+        </div>
+      </section>
+
+      <section id="testimonials" class="testimonials container">
+        <p class="section-label">STUDENT STORIES</p>
+        <h2>Loved by learners everywhere.</h2>
+        <div class="testimonial-grid">
+          <article><p>"Shiksha AI helped me ace my physics exams. The PDF Q&A is insane!"</p><b>— Rahul T.</b></article>
+          <article><p>"The quiz generator creates exactly the questions my professor asks."</p><b>— Priya M.</b></article>
+          <article><p>"Finally, an AI that understands Marathi and helps me study in my native language."</p><b>— Sameer D.</b></article>
+        </div>
+      </section>
+
+      <section id="faq" class="faq container">
+        <p class="section-label">GOT QUESTIONS?</p>
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details><summary>Is Shiksha AI free?</summary><p>Yes, basic features are free during the hackathon period!</p></details>
+          <details><summary>What file types are supported?</summary><p>We support PDF, DOCX, PPTX, TXT, and Images (PNG, JPG, WEBP).</p></details>
+          <details><summary>Is my data secure?</summary><p>Absolutely. Your documents are stored securely and only used for your study sessions.</p></details>
         </div>
       </section>
     </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-brand"><span class="brand-mark">✦</span> Shiksha AI</div>
+        <p>Built with ❤️ for the Hackathon</p>
+      </div>
+    </footer>
 
     <dialog id="auth-dialog"><button class="close" aria-label="Close">×</button><div id="auth-content"></div></dialog>
     <template id="auth-template"><section class="auth-card"><div class="auth-top"><span class="brand-mark">✦</span><span>Shiksha AI</span></div><h2></h2><p class="muted"></p><form id="auth-form"><label class="name-field">Your name<input name="name" autocomplete="name" minlength="2" required /></label><label>Email address<input name="email" type="email" autocomplete="email" required /></label><label>Password<input name="password" type="password" autocomplete="current-password" minlength="8" required /></label><p class="form-error" role="alert"></p><button class="btn btn-coral submit" type="submit"></button></form><p class="switch-auth"></p></section></template>
