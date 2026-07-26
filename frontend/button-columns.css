@@ -1,0 +1,65 @@
+/* Clickable study-tool columns */
+.quick-actions .section-heading::after {
+  content: 'Select a column to get started';
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.actions-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.actions-grid button {
+  min-height: 128px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 14px;
+  transition: border-color .18s, box-shadow .18s, transform .18s;
+}
+
+.actions-grid button::after {
+  content: '→';
+  position: absolute;
+  right: 13px;
+  bottom: 12px;
+  color: var(--blue);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.actions-grid button:hover {
+  box-shadow: 0 8px 18px #1d5caa18;
+  transform: translateY(-2px);
+}
+
+.actions-grid button:focus-visible {
+  outline: 3px solid #90c2ff;
+  outline-offset: 2px;
+}
+
+.actions-grid span {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #edf5ff;
+  margin: 0;
+}
+
+.actions-grid small {
+  max-width: calc(100% - 18px);
+  line-height: 1.4;
+}
+
+@media (max-width: 1150px) {
+  .actions-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .quick-actions .section-heading::after { display: none; }
+  .actions-grid { grid-template-columns: repeat(2, 1fr); }
+  .actions-grid button { min-height: 115px; }
+}

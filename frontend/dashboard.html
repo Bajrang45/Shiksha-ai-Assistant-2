@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Study Dashboard — Shiksha AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" /><link rel="stylesheet" href="dashboard.css" /><link rel="stylesheet" href="button-columns.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside><a class="brand" href="index.html"><span class="brand-mark">✦</span> Shiksha AI</a><p class="side-label">AI LEARNING SPACE</p><nav><a class="active" href="#overview" data-view="overview">⌂ Overview</a><a href="#upload" data-action="upload">⌑ Upload & ask</a><a href="#chat" data-view="chat">✦ AI chat with notes</a><a href="#quizzes" data-view="quizzes">◉ AI quizzes</a><a href="#flashcards" data-view="flashcards">▣ Flashcards</a></nav><div class="ai-side-card"><span>✦</span><b>Shiksha AI is ready</b><small>Upload a file and learn with your own notes.</small></div><button id="logout">← Log out</button></aside>
+    <main>
+      <header><div><p class="section-label">YOUR AI LEARNING DESK</p><h1>👋 Good morning, <span id="student-name">Student</span>!</h1><p class="intro">Today's goal: <b>Finish Physics Chapter 3</b></p></div><div class="avatar" id="avatar">S</div></header>
+      <section class="goal-banner"><div><span class="goal-icon">✦</span><div><small>CONTINUE WHERE YOU LEFT OFF</small><b>Ready to learn something new?</b><p>Upload your notes, then let AI explain, quiz and revise with you.</p></div></div><button class="btn btn-coral" data-action="chat">Start AI session <span>→</span></button></section>
+      <section class="stats" aria-label="Study statistics"><article><span>🔥</span><small>Study streak</small><b>12 <em>Days</em></b></article><article><span>✦</span><small>Questions asked</small><b>138</b></article><article><span>📄</span><small>PDF uploaded</small><b>18</b></article><article><span>▣</span><small>Flashcards</small><b>230</b></article><article><span>◉</span><small>Quiz accuracy</small><b>84<em>%</em></b></article><article><span>◷</span><small>Study time</small><b>8 <em>Hours</em></b></article></section>
+      <section class="dashboard-grid"><article class="panel upload-panel"><div class="panel-head"><div><p class="card-kicker">KNOWLEDGE BASE</p><h2>📄 Upload PDF & ask questions</h2></div><span class="ai-pill">AI powered</span></div><div id="drop-zone" class="drop-zone"><div class="upload-icon">↑</div><h3>Drag & drop your study file</h3><p>or <button data-action="upload">Browse files</button></p><small>Supports <b>PDF</b> <b>DOCX</b> <b>PPT</b> <b>TXT</b> <b>Images</b></small></div><div id="upload-status" class="upload-status" hidden></div></article>
+        <article class="panel activity-panel"><div class="panel-head"><div><p class="card-kicker">YOUR PROGRESS</p><h2>Recent activity</h2></div><button class="quiet-btn" data-view="chat">View all</button></div><ol><li><span class="activity-dot blue"></span><div><b>AI answered 15 questions</b><small>Today · Physics</small></div></li><li><span class="activity-dot orange"></span><div><b>Completed flashcards</b><small>Yesterday · Chemistry</small></div></li><li><span class="activity-dot purple"></span><div><b>Generated a quiz</b><small>Yesterday · Mathematics</small></div></li><li><span class="activity-dot green"></span><div><b>Uploaded Physics.pdf</b><small>2 days ago</small></div></li></ol></article>
+      </section>
+      <section class="quick-actions"><div class="section-heading"><div><p class="section-label">⚡ QUICK ACTIONS</p><h2>Let AI help you study</h2></div></div><div class="actions-grid"><button data-action="upload"><span>📄</span><b>Upload PDF</b><small>Ask your own notes</small></button><button data-action="summary"><span>✧</span><b>Generate summary</b><small>Get the key ideas</small></button><button data-view="flashcards"><span>▣</span><b>Create flashcards</b><small>Revise faster</small></button><button data-view="quizzes"><span>◉</span><b>Practice quiz</b><small>Test yourself</small></button><button data-action="voice"><span>🎤</span><b>Voice assistant</b><small>Ask out loud</small></button></div></section>
+      <section id="ai-workspace" class="workspace" hidden></section>
+    </main>
+  </div>
+  <input id="file-input" type="file" accept=".pdf,.docx,.pptx,.txt,image/*" hidden />
+  <script src="dashboard.js"></script>
+</body>
+</html>

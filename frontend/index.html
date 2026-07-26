@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Shiksha AI, your science study companion." />
+    <title>Shiksha AI — Learn with curiosity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <nav class="nav container">
+        <a class="brand" href="#top"><span class="brand-mark">✦</span><span>Shiksha AI</span></a>
+        <div class="nav-links"><a href="#features">How it works</a><a href="#features">Subjects</a><button class="login-link" data-open-auth="login">Log in</button><button class="nav-join" data-open-auth="register">Join free</button></div>
+      </nav>
+
+      <section id="top" class="hero">
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">YOUR PERSONAL LEARNING LAB</p>
+            <h1>Discover more.<br /><em>Learn deeper.</em></h1>
+            <p class="hero-text">A smarter place to explore your notes, ask questions and turn every study session into real progress.</p>
+            <div class="hero-actions"><button class="btn btn-coral" data-open-auth="register">Start learning <span>→</span></button><button class="text-action" data-open-auth="login">I already have an account</button></div>
+            <div class="mini-stats"><span><b>24/7</b> study support</span><i></i><span><b>Built for</b> curious minds</span></div>
+          </div>
+          <div class="lab-art" aria-hidden="true">
+            <div class="glow glow-a"></div><div class="glow glow-b"></div>
+            <div class="atom"><i></i><i></i><i></i><b></b></div>
+            <div class="books"><span></span><span></span><span></span><span></span></div>
+            <div class="microscope"><div class="scope-head"></div><div class="scope-arm"></div><div class="scope-stage"></div><div class="scope-base"></div><div class="scope-eye"></div></div>
+            <div class="flask flask-one"><i></i></div><div class="flask flask-two"><i></i></div>
+            <div class="formula f-one">H₂O</div><div class="formula f-two">E = mc²</div><div class="formula f-three">∑</div>
+            <div class="spark s-one">✦</div><div class="spark s-two">✦</div><div class="spark s-three">•</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="features container">
+        <p class="section-label">LEARN IN YOUR OWN WAY</p>
+        <h2>A complete toolkit for<br />curious learners.</h2>
+        <div class="feature-grid">
+          <article><div class="feature-icon orange">⌁</div><h3>Ask your materials</h3><p>Get clear, grounded answers from the notes and documents you upload.</p></article>
+          <article><div class="feature-icon blue">✦</div><h3>Practice actively</h3><p>Create quizzes and flashcards that help knowledge truly stick.</p></article>
+          <article><div class="feature-icon pink">◌</div><h3>Keep your momentum</h3><p>Build simple study plans that work around your real life.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="auth-dialog"><button class="close" aria-label="Close">×</button><div id="auth-content"></div></dialog>
+    <template id="auth-template"><section class="auth-card"><div class="auth-top"><span class="brand-mark">✦</span><span>Shiksha AI</span></div><h2></h2><p class="muted"></p><form id="auth-form"><label class="name-field">Your name<input name="name" autocomplete="name" minlength="2" required /></label><label>Email address<input name="email" type="email" autocomplete="email" required /></label><label>Password<input name="password" type="password" autocomplete="current-password" minlength="8" required /></label><p class="form-error" role="alert"></p><button class="btn btn-coral submit" type="submit"></button></form><p class="switch-auth"></p></section></template>
+    <script src="app.js"></script>
+  </body>
+</html>
