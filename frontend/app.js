@@ -2,6 +2,14 @@ const API_URL = localStorage.getItem('shiksha_api_url') || 'http://127.0.0.1:800
 const dialog = document.querySelector('#auth-dialog');
 const template = document.querySelector('#auth-template');
 
+function apiMessage(detail, fallback) {
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) {
+    return detail.map((item) => item.msg || item.message || fallback).join(' ');
+  }
+  return fallback;
+}
+
 function openAuth(mode) {
   const fragment = template.content.cloneNode(true);
   const content = fragment.querySelector('.auth-card');
@@ -28,7 +36,7 @@ async function submitAuth(event, register) {
   try {
     const response = await fetch(`${API_URL}/auth/${register ? 'register' : 'login'}`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(values)});
     const data = await response.json();
-    if (!response.ok) throw new Error(data.detail || 'Something went wrong.');
+    if (!response.ok) throw new Error(apiMessage(data.detail, 'Something went wrong.'));
     localStorage.setItem('shiksha_token', data.access_token);
     localStorage.setItem('shiksha_user', JSON.stringify(data.user));
     window.location.href = 'dashboard.html';
@@ -37,4 +45,3 @@ async function submitAuth(event, register) {
 
 document.querySelectorAll('[data-open-auth]').forEach(button => button.onclick = () => openAuth(button.dataset.openAuth));
 dialog.querySelector('.close').onclick = () => dialog.close();
-
