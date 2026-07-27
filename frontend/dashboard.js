@@ -115,7 +115,7 @@ function startVoiceInput() {
   recognition.start();
 }
 
-document.addEventListener('click', (event) => { 
+document.addEventListener('click', (event) => {
   if (event.target.closest('[data-action="voice"]')) startVoiceInput();
   if (event.target.closest('#tts-button')) {
     if (!window.lastAiAnswer) return;
@@ -128,7 +128,7 @@ document.addEventListener('click', (event) => {
   }
 });
 
-const dropZone = document.querySelector('#drop-zone'); ['dragenter', 'dragover'].forEach((name) => dropZone.addEventListener(name, (event) => { event.preventDefault(); dropZone.classList.add('dragging'); })); ['dragleave', 'drop'].forEach((name) => dropZone.addEventListener(name, (event) => { event.preventDefault(); dropZone.classList.remove('dragging'); })); dropZone.addEventListener('drop', (event) => { const file = event.dataTransfer.files[0]; if (file) uploadFile(file); });
+const dropZone = document.querySelector('#drop-zone');['dragenter', 'dragover'].forEach((name) => dropZone.addEventListener(name, (event) => { event.preventDefault(); dropZone.classList.add('dragging'); }));['dragleave', 'drop'].forEach((name) => dropZone.addEventListener(name, (event) => { event.preventDefault(); dropZone.classList.remove('dragging'); })); dropZone.addEventListener('drop', (event) => { const file = event.dataTransfer.files[0]; if (file) uploadFile(file); });
 
 document.addEventListener('submit', async (event) => {
   if (event.target.id === 'flashcards-form') {
@@ -154,8 +154,10 @@ document.addEventListener('submit', async (event) => {
     } catch (error) { message.textContent = error.message || 'Unable to create flashcards.'; showToast(error.message || 'Flashcard error.', 'error'); }
     finally { button.disabled = false; button.textContent = 'Generate cards'; }
   }
-  if (event.target.id === 'chat-form') { event.preventDefault(); const question = document.querySelector('#chat-question').value.trim(); const button = event.target.querySelector('[type="submit"]'); const message = workspace.querySelector('.workspace-message'); if (!question) return; button.disabled = true; button.innerHTML = '<span class="btn-spinner">⏳</span> Thinking...'; message.textContent = ''; document.querySelector('#chat-question').value = '';
+  if (event.target.id === 'chat-form') {
+    event.preventDefault(); const question = document.querySelector('#chat-question').value.trim(); const button = event.target.querySelector('[type="submit"]'); const message = workspace.querySelector('.workspace-message'); if (!question) return; button.disabled = true; button.innerHTML = '<span class="btn-spinner">⏳</span> Thinking...'; message.textContent = ''; document.querySelector('#chat-question').value = '';
     const typingEl = showTypingIndicator();
-    try { const lang = document.querySelector('#language-selector')?.value || 'English'; const response = await fetch(`${apiUrl()}/chat`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` }, body: JSON.stringify({ question: `${question} (Answer in ${lang})` }) }); removeTypingIndicator(); if (!response.ok) throw await apiError(response, 'Unable to get an answer.'); const data = await response.json(); displayAnswer(data.answer, data.source, question); saveHistory(question, data.answer, data.source); loadHistory(); } catch (error) { removeTypingIndicator(); showToast(error.message || 'AI chat error.', 'error'); message.textContent = error.message || 'Unable to connect to AI chat.'; } finally { button.disabled = false; button.innerHTML = 'Send <span>→</span>'; } }
+    try { const lang = document.querySelector('#language-selector')?.value || 'English'; const response = await fetch(`${apiUrl()}/chat`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` }, body: JSON.stringify({ question: `${question} (Answer in ${lang})` }) }); removeTypingIndicator(); if (!response.ok) throw await apiError(response, 'Unable to get an answer.'); const data = await response.json(); displayAnswer(data.answer, data.source, question); saveHistory(question, data.answer, data.source); loadHistory(); } catch (error) { removeTypingIndicator(); showToast(error.message || 'AI chat error.', 'error'); message.textContent = error.message || 'Unable to connect to AI chat.'; } finally { button.disabled = false; button.innerHTML = 'Send <span>→</span>'; }
+  }
   if (event.target.id === 'quiz-form') { event.preventDefault(); const topic = document.querySelector('#quiz-topic').value.trim(); const button = event.target.querySelector('button'); const result = document.querySelector('#quiz-result'); const message = workspace.querySelector('.workspace-message'); button.disabled = true; button.textContent = 'Creating...'; try { const response = await fetch(`${apiUrl()}/quizzes`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` }, body: JSON.stringify({ topic }) }); const data = await response.json(); if (!response.ok) throw new Error(data.detail || 'Unable to create a quiz.'); result.replaceChildren(); data.questions.forEach((item, index) => { const question = document.createElement('details'); question.className = 'quiz-question'; question.innerHTML = `<summary>${index + 1}. ${item.question}</summary><p>Answer: ${item.answer}</p>`; result.append(question); }); result.hidden = false; } catch (error) { message.textContent = error.message; } finally { button.disabled = false; button.textContent = 'Create quiz'; } }
 });
