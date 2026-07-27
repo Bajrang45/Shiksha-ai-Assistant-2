@@ -13,7 +13,7 @@ app = FastAPI(title=settings.app_name, version="1.0.0", description="API for the
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origin_list,
-    # Accept Live Server, Vite, and other local frontend ports during development.
+    # Regex allows any localhost port for local development.
     allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
