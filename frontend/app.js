@@ -1,4 +1,9 @@
-const API_URL = localStorage.getItem('shiksha_api_url') || 'https://shiksha-ai-assistant.onrender.com';
+function getApiUrl() {
+  const saved = localStorage.getItem('shiksha_api_url');
+  const base = saved?.trim() || 'https://shiksha-ai-assistant.onrender.com';
+  return base.replace(/\/+$|\/api$/g, '') + '/api';
+}
+const API_URL = getApiUrl();
 const dialog = document.querySelector('#auth-dialog');
 const template = document.querySelector('#auth-template');
 
