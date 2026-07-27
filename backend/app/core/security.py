@@ -1,23 +1,35 @@
+import hashlib
+import hmac
+import os
 from datetime import datetime, timedelta, timezone
 
 from jose import jwt
-from passlib.context import CryptContext
 
 from app.core.config import get_settings
 
-# PBKDF2-SHA256 uses Python's standard cryptographic primitives and avoids the
-# bcrypt 5.x / passlib compatibility issue that rejects every password during
-# registration with a misleading 72-byte error.
-password_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 ALGORITHM = "HS256"
+_ITERATIONS = 260_000  # OWASP recommended minimum for PBKDF2-SHA256
 
 
 def hash_password(password: str) -> str:
-    return password_context.hash(password)
+    """Hash a password using PBKDF2-HMAC-SHA256 (Python stdlib, no bcrypt)."""
+    salt = os.urandom(16)
+    key = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, _ITERATIONS)
+    # Store as "iterations:hex_salt:hex_key"
+    return f"{_ITERATIONS}:{salt.hex()}:{key.hex()}"
 
 
 def verify_password(password: str, hashed_password: str) -> bool:
-    return password_context.verify(password, hashed_password)
+    """Verify a password against a stored PBKDF2 hash."""
+    try:
+        iterations_str, salt_hex, key_hex = hashed_password.split(":")
+        iterations = int(iterations_str)
+        salt = bytes.fromhex(salt_hex)
+        stored_key = bytes.fromhex(key_hex)
+        candidate = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
+        return hmac.compare_digest(candidate, stored_key)
+    except Exception:
+        return False
 
 
 def create_access_token(subject: str) -> str:

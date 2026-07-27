@@ -8,9 +8,17 @@ const dialog = document.querySelector('#auth-dialog');
 const template = document.querySelector('#auth-template');
 
 function apiMessage(detail, fallback) {
-  if (typeof detail === 'string') return detail;
+  if (typeof detail === 'string') {
+    // Sanitize raw bcrypt/Pydantic byte-length error into a friendly message
+    if (detail.includes('72 bytes')) return 'Password is too long. Please use a shorter password (max 72 characters).';
+    return detail;
+  }
   if (Array.isArray(detail)) {
-    return detail.map((item) => item.msg || item.message || fallback).join(' ');
+    return detail.map((item) => {
+      const msg = item.msg || item.message || fallback;
+      if (msg.includes('72 bytes')) return 'Password is too long. Please use a shorter password (max 72 characters).';
+      return msg;
+    }).join(' ');
   }
   return fallback;
 }
